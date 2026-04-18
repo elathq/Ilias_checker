@@ -21,6 +21,8 @@ Diese Erweiterung zeigt dir alle anstehenden Praktikums-Fristen der FH Aachen (o
 1. Öffne im Browser `about:debugging#/runtime/this-firefox`.
 2. Klicke auf **Temporäres Add-on laden...** und wähle die Datei `manifest.json` aus diesem Ordner aus.
 
+🚫**Für Safari (Nicht Unterstützt):""
+
 ## 2. ⚙️ Einrichtung
 
 1. Klicke auf das Erweiterungs-Icon und öffne die **Einstellungen**.
