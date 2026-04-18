@@ -1,6 +1,6 @@
 # 🎓 ILIAS Deadline Checker
 
-> **Inoffizielles Tool von Studenten für Studenten – kein offizielles Angebot der FH Aachen.**
+> **Inoffizielles Tool – kein offizielles Angebot der FH Aachen.**
 
 Diese Erweiterung zeigt dir alle anstehenden Praktikums-Fristen der FH Aachen (oder anderen Hochschulen) mit einem Klick.
 
