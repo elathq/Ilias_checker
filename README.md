@@ -6,8 +6,7 @@ Diese Erweiterung zeigt dir alle anstehenden Praktikums-Fristen der FH Aachen (o
 ########################################################################################################################################################################
 
 ### 1. Installation
-✅ **Getestet und funktioniert dauerhaft in:** Chrome, Edge, Opera, Vivaldi und Brave.
-
+✅ **Getestet und funktioniert dauerhaft in:** Chrome, Edge, Opera, Vivaldi und Brave.  
 ⚠️ **Firefox:** Funktioniert technisch auch, wird aber hier **nicht offiziell unterstützt** Grund: (Erweiterung muss nach jedem Browser-Neustart neu geladen werden).
 
 **Für Chrome / Edge / Opera / Vivaldi / Brave:**
