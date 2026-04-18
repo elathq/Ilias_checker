@@ -1,0 +1,96 @@
+body { 
+  width: 380px; 
+  font-family: 'Segoe UI', Arial, sans-serif; 
+  padding: 15px; 
+  margin: 0; 
+  color: #333; 
+  background-color: #f4f7f9; 
+}
+
+h3 { 
+  margin-top: 0; 
+  color: #333; 
+  border-bottom: 2px solid #00857e; 
+  padding-bottom: 8px;
+  font-size: 18px;
+}
+
+.deadline-item { 
+  background: #fff; 
+  border: 1px solid #d1d9e0; 
+  border-radius: 8px; 
+  padding: 12px; 
+  margin-bottom: 12px; 
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08); 
+  display: flex;
+  flex-direction: column;
+  gap: 4px; 
+}
+
+.course-name { 
+  color: #2c3e50; 
+  font-size: 15px; 
+  font-weight: 700; 
+  font-style: normal; 
+  letter-spacing: -0.2px;
+}
+
+.date { 
+  color: #d73a49; 
+  font-size: 20px; 
+  font-weight: 800; 
+  font-family: 'Consolas', 'Courier New', monospace; 
+  line-height: 1.1;
+  margin-top: 2px;
+}
+
+#settings-view { 
+  display: none; 
+}
+
+.input-group { 
+  display: flex; 
+  gap: 8px; 
+  margin-bottom: 8px; 
+}
+
+.input-group input { 
+  font-family: 'Segoe UI', Arial, sans-serif; 
+  padding: 8px; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+}
+
+.input-name { width: 35%; }
+.input-url { width: 65%; }
+
+button { 
+  font-family: 'Segoe UI', Arial, sans-serif; 
+  cursor: pointer; 
+  margin-top: 10px; 
+  width: 100%; 
+  padding: 12px; 
+  background-color: #00857e; 
+  color: white; 
+  border: none; 
+  border-radius: 6px; 
+  font-weight: bold; 
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+button:hover { 
+  background-color: #00857e; 
+  transform: translateY(-1px);
+}
+
+#btn-back { 
+  background-color: #6e7781; 
+}
+
+.loader { 
+  font-style: italic; 
+  color: #666; 
+  text-align: center; 
+  padding: 25px 0; 
+}
