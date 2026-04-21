@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
           const htmlDokument = parser.parseFromString(seitenQuelltext, 'text/html');
           
           const alleEigenschaften = htmlDokument.querySelectorAll('.il_ItemProperty');
-          let fristText = "Keine Frist gefunden.";
+          let fristText = "Fehler, bitte log dich in ILIAS ein.";
 
           alleEigenschaften.forEach(function(eigenschaft) {
             if (eigenschaft.innerText.includes("Nächste Abgabefrist:")) {
