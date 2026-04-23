@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "ILIAS Deadline Checker",
-  "version": "1.0",
+  "version": "1.1",
   "author": "elathq | Younes",
   "description": "Zeigt live die nächsten Abgabefristen für FH Aachen ILIAS Module an.",
   "permissions": ["storage"],
