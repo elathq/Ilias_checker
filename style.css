@@ -31,8 +31,6 @@ h3 {
   color: #2c3e50; 
   font-size: 15px; 
   font-weight: 700; 
-  font-style: normal; 
-  letter-spacing: -0.2px;
 }
 
 .date { 
@@ -40,32 +38,34 @@ h3 {
   font-size: 20px; 
   font-weight: 800; 
   font-family: 'Consolas', 'Courier New', monospace; 
-  line-height: 1.1;
-  margin-top: 2px;
 }
 
-#settings-view { 
-  display: none; 
-}
+#settings-view { display: none; }
 
 .input-group { 
   display: flex; 
   gap: 8px; 
   margin-bottom: 8px; 
+  align-items: center;
 }
 
 .input-group input { 
-  font-family: 'Segoe UI', Arial, sans-serif; 
   padding: 8px; 
   border: 1px solid #ccc; 
   border-radius: 4px; 
 }
 
-.input-name { width: 35%; }
-.input-url { width: 65%; }
+.input-name { width: 30%; }
+.input-url { width: 55%; }
+
+.btn-delete {
+  width: 15%;
+  margin-top: 0 !important;
+  background-color: #d73a49 !important;
+  padding: 8px !important;
+}
 
 button { 
-  font-family: 'Segoe UI', Arial, sans-serif; 
   cursor: pointer; 
   margin-top: 10px; 
   width: 100%; 
@@ -75,59 +75,11 @@ button {
   border: none; 
   border-radius: 6px; 
   font-weight: bold; 
-  font-size: 14px;
   transition: all 0.2s ease;
 }
 
-button:hover { 
-  background-color: #00857e; 
-  transform: translateY(-1px);
-}
+.btn-secondary { background-color: #6e7781; }
 
-#btn-back { 
-  background-color: #6e7781; 
-}
+button:hover { transform: translateY(-1px); opacity: 0.9; }
 
-.loader { 
-  font-style: italic; 
-  color: #666; 
-  text-align: center; 
-  padding: 25px 0; 
-}
-
-
-
-
-
-
-
-/* --- Neue Styles für das dynamische UI --- */
-
-/* Breiten anpassen für den Löschen-Button */
-.input-name { width: 30%; }
-.input-url { width: 55%; }
-
-.btn-delete {
-  width: 15%;
-  margin-top: 0;
-  padding: 8px;
-  background-color: #d73a49;
-  font-weight: bold;
-}
-
-.btn-delete:hover {
-  background-color: #cb2431;
-}
-
-.btn-secondary {
-  background-color: #6e7781;
-}
-
-.btn-secondary:hover {
-  background-color: #57606a;
-}
-
-/* Kleiner Abstand beim Link-Klick */
-.deadline-item a {
-  cursor: pointer;
-}
+.loader { font-style: italic; color: #666; text-align: center; padding: 25px 0; }

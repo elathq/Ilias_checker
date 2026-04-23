@@ -14,12 +14,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   // === 2 . HAUPT-LOGIK ===
+  // prüft sofort den Speicher und entscheiden, was passiert
   chrome.storage.local.get(['iliasModules'], function(gespeicherteDaten) {
     const meineModule = gespeicherteDaten.iliasModules;
 
     if (meineModule && meineModule.length > 0) {
+      // Fall A: Daten vorhanden -> Fristen abfragen
       fristenAbfragen(meineModule);
     } else {
+      // Fall B: Keine Daten -> Hinweis anzeigen
       listenContainer.innerHTML = "Keine Module hinterlegt. Bitte Einstellungen öffnen.";
     }
   });
@@ -33,7 +36,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     modulListe.forEach(function(einzelnesModul) {
       fetch(einzelnesModul.url)
-        .then(function(antwort) { return antwort.text(); })
+        .then(function(antwort) { 
+          // PRÜFUNG: Wenn die URL "login.php" oder "shibboleth" enthält, sind wir ausgeloggt
+          if (antwort.url.includes("login.php") || antwort.url.includes("shibboleth")) {
+            throw new Error("LOGIN_REQUIRED");
+          }
+          return antwort.text(); 
+        })
         .then(function(seitenQuelltext) {
           const parser = new DOMParser(); 
           const htmlDokument = parser.parseFromString(seitenQuelltext, 'text/html');
@@ -48,16 +57,16 @@ document.addEventListener('DOMContentLoaded', function() {
           });
 
           fertigesHTML += '<div class="deadline-item">' +
-                            '<div class="course-name">' + einzelnesModul.name + '</div>' +
+                            '<div class="course-name">' + (einzelnesModul.name) + '</div>' +
                             '<div class="date">' + fristText + '</div>' +
                           '</div>';
         })
-        .catch(function() {
+        .catch(function(error) {
           // Smarter Login-Hinweis statt einfachem Fehlertext
           fertigesHTML += '<div class="deadline-item">' +
                             '<div class="course-name">' + einzelnesModul.name + '</div>' +
                             '<div class="date" style="font-size: 14px; margin-top: 5px;">' + 
-                              '<a href="https://www.ili.fh-aachen.de/login.php?client_id=elearning&cmd=force_login&lang=de" target="_blank" style="color: #d73a49; text-decoration: underline;">ILIAS Login erneuern</a>' + 
+                              '<a href="https://www.ili.fh-aachen.de/login.php?cmd=force_login" target="_blank" style="color: #d73a49; text-decoration: underline; font-family: sans-serif; font-weight: bold;">ILIAS Login erneuern</a>' + 
                             '</div>' +
                           '</div>';
         })
@@ -70,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Hilfsfunktion: Baut ein einzelnes Eingabefeld (Reihe)
+  // Hilfsfunktion: Baut ein einzelnes Eingabefeld (Reihe) dynamisch auf
   function erstelleEingabeFeld(name = "", url = "") {
     const group = document.createElement('div');
     group.className = 'input-group';
@@ -92,13 +101,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // === EVENT-LISTENER ===
 
+  // Button für neues Modul: fügt eine leere Reihe in den Einstellungen hinzu
   hinzufuegenButton.onclick = function() {
-    erstelleEingabeFeld(); // Fügt eine leere Reihe hinzu
+    erstelleEingabeFeld(); 
   };
 
+  // Speichern-Button: daten einsammeln und speichern
   speicherButton.onclick = function() {
     const neueModulListe = [];
-    // Alle aktuellen Input-Gruppen auslesen
+    // Alle aktuell sichtbaren Input-Gruppen auslesen
     const alleGruppen = modulesContainer.querySelectorAll('.input-group');
     
     alleGruppen.forEach(function(gruppe) {
@@ -115,12 +126,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   };
 
+  // Einstellungen-Button: gespeicherte Felder füllen und Ansicht wechseln
   einstellungenButton.onclick = function() {
-    // Vorher leeren, damit sie sich nicht duplizieren
+    // Container leeren, um Duplikate beim wiederholten Öffnen zu vermeiden
     modulesContainer.innerHTML = "";
 
     chrome.storage.local.get(['iliasModules'], function(daten) {
       if(daten.iliasModules && daten.iliasModules.length > 0) {
+        // Für jedes gespeicherte Modul eine Reihe generieren
         daten.iliasModules.forEach(function(modul) {
           erstelleEingabeFeld(modul.name, modul.url);
         });
@@ -133,6 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   };
 
+  // Back-Button: Ansicht wechseln
   zurueckButton.onclick = function() {
     einstellungenAnsicht.style.display = 'none';
     hauptAnsicht.style.display = 'block';
