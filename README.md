@@ -1,6 +1,6 @@
 # 🎓 ILIAS Deadline Checker
 
-> **Inoffizielles Tool – kein offizielles Angebot der FH Aachen.**
+> **Inoffizielles Tool von Studenten für Studenten – kein offizielles Angebot der FH Aachen.**
 
 Diese Erweiterung zeigt dir alle anstehenden Praktikums-Fristen der FH Aachen (oder anderen Hochschulen) mit einem Klick.
 
@@ -21,8 +21,6 @@ Diese Erweiterung zeigt dir alle anstehenden Praktikums-Fristen der FH Aachen (o
 1. Öffne im Browser `about:debugging#/runtime/this-firefox`.
 2. Klicke auf **Temporäres Add-on laden...** und wähle die Datei `manifest.json` aus diesem Ordner aus.
 
-🚫**Für Safari (Nicht unterstützt / not available at the moment):**
-
 ## 2. ⚙️ Einrichtung
 
 1. Klicke auf das Erweiterungs-Icon und öffne die **Einstellungen**.
@@ -34,7 +32,7 @@ Diese Erweiterung zeigt dir alle anstehenden Praktikums-Fristen der FH Aachen (o
 
 *  **Passwort-Sicher:** Das Tool speichert **keine Passwörter**, sondern nutzt einfach deinen aktuellen, aktiven ILIAS-Login-Cookie im Browser.
 *  **100% Lokal:** Deine Links bleiben nur auf deinem PC. Kein Tracking, keine Cloud.
-*  **Tipp:** Wenn du bei ILIAS ausgeloggt bist bzw. der Login-Cookie abgelaufen ist, zeigt das Tool einen Fehler an. Einfach kurz bei ILIAS anmelden, dann funktioniert wieder alles, auch wenn du Ilias geschlossen hast bzw. auf anderen Seiten unterwegs bist.
+*  **Tipp:** Wenn du bei ILIAS ausgeloggt bist bzw. der Login-Cookie abgelaufen ist, zeigt das Tool einen Fehler an. Einfach kurz bei ILIAS anmelden, dann funktioniert wieder alles!
 
 ---
 
