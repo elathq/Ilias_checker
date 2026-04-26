@@ -14,15 +14,24 @@
 
   <div id="settings-view">
     <h3>Module konfigurieren</h3>
-    
-    <div id="modules-container">
-      </div>
-
+    <div id="modules-container"></div>
     <button id="btn-add" class="btn-secondary">+ Weiteres Modul hinzufügen</button>
+    
+    <div class="discord-settings">
+      <label>Discord Webhook URL (optional):</label>
+      <input type="text" id="discord-webhook" placeholder="https://discord.com/api/webhooks/...">
+      
+      <button id="btn-send-discord" style="background-color: #5865F2; margin-top: 10px;">Übersicht an Discord senden</button>
+    </div>
+
     <button id="btn-save">Speichern & Aktualisieren</button>
     <button id="btn-back" class="btn-secondary">Zurück</button>
   </div>
 
-  <script src="popup.js"></script>
+  <script src="js/time.js"></script>
+  <script src="js/discord.js"></script>
+  <script src="js/ilias.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/popup.js"></script>
 </body>
 </html>

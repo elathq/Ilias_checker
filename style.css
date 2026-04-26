@@ -4,7 +4,7 @@ body {
   padding: 15px; 
   margin: 0; 
   color: #333; 
-  background-color: #f4f7f9; 
+  background-color: #f9f9f9; 
 }
 
 h3 { 
@@ -24,46 +24,62 @@ h3 {
   box-shadow: 0 2px 5px rgba(0,0,0,0.08); 
   display: flex;
   flex-direction: column;
-  gap: 4px; 
 }
 
-.course-name { 
-  color: #2c3e50; 
-  font-size: 15px; 
-  font-weight: 700; 
-}
-
-.date { 
-  color: #d73a49; 
-  font-size: 20px; 
-  font-weight: 800; 
-  font-family: 'Consolas', 'Courier New', monospace; 
-}
+.course-name { color: #2c3e50; font-size: 15px; font-weight: 700; }
+.date { color: #d73a49; font-size: 20px; font-weight: 800; font-family: monospace; }
 
 #settings-view { display: none; }
 
+/* Ersetze deine .input-group und die Felder durch dies hier: */
+
 .input-group { 
   display: flex; 
-  gap: 8px; 
-  margin-bottom: 8px; 
+  gap: 5px; 
+  margin-bottom: 10px; 
+  align-items: center; 
+  width: 100%;
+}
+
+
+/* Die entscheidende Änderung: URL und Date teilen sich exakt denselben Platz */
+.input-url, .input-date, .input-name{ 
+  flex: 1; /* Nimmt den restlichen verfügbaren Platz ein */
+  width: 0; /* Verhindert, dass der Inhalt die Breite "aufdrückt" */
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Padding wird in die Breite eingerechnet */
+  height: 35px; /* Einheitliche Höhe für beide */
+}
+.input-name{ 
+  max-width: 32%;
+}
+
+.btn-toggle, .btn-delete {
+  width: 38px;
+  height: 35px;
+  flex-shrink: 0;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex;
+  justify-content: center;
   align-items: center;
+  background-color: #00857e; 
 }
-
-.input-group input { 
-  padding: 8px; 
-  border: 1px solid #ccc; 
-  border-radius: 4px; 
-}
-
-.input-name { width: 30%; }
-.input-url { width: 55%; }
-
 .btn-delete {
-  width: 15%;
-  margin-top: 0 !important;
-  background-color: #d73a49 !important;
-  padding: 8px !important;
+  background-color: #d73a49
 }
+
+.discord-settings {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.discord-settings label { font-size: 12px; font-weight: bold; display: block; margin-bottom: 5px; }
+.discord-settings input { width: 95%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
 
 button { 
   cursor: pointer; 
@@ -74,12 +90,72 @@ button {
   color: white; 
   border: none; 
   border-radius: 6px; 
-  font-weight: bold; 
-  transition: all 0.2s ease;
+  font-weight: bold;
 }
 
 .btn-secondary { background-color: #6e7781; }
+button:hover { opacity: 0.9; transform: translateY(-1px); }
 
-button:hover { transform: translateY(-1px); opacity: 0.9; }
+.loader { font-style: italic; color: #666; text-align: center; padding: 20px 0; }
 
-.loader { font-style: italic; color: #666; text-align: center; padding: 25px 0; }
+
+/* === Fix für das hüpfende Kalender-Icon === */
+.input-date {
+  cursor: pointer;
+  color-scheme: light;
+  box-sizing: border-box; 
+}
+
+/* Der Picker-Indikator (das Icon) */
+.input-date::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+  padding: 3px;
+  margin-right: -3px; 
+  background-color: transparent;
+}
+
+/* Hover-Effekt ohne Layout-Verschiebung */
+.input-date:hover::-webkit-calendar-picker-indicator {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.input-date:focus::-webkit-calendar-picker-indicator {
+  background-color: rgba(0, 133, 126, 0.1);
+  outline: none;
+}
+
+/* Zentrierung der Ausgabe */
+.deadline-item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  background: #fff;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #d1d9e0;
+}
+
+/* Der Kursname oben (kursiv, kein Emoji) */
+.course-name {
+  font-style: italic;
+  color: #2c3e50;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+/* Die große Datumsanzeige in der Mitte */
+.date {
+  color: #d73a49;
+  font-size: 22px;
+  font-weight: 800;
+  margin: 5px 0;
+}
+
+/* Farben für die Countdown-Zeile */
+.time-green  { color: #27ae60; } /* Grün */
+.time-orange { color: #e67e22; } /* Orange */
+.time-red    { color: #d73a49; } /* Rot */
