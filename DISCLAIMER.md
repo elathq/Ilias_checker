@@ -13,7 +13,7 @@ Die Nutzung dieser Browser-Erweiterung erfolgt ausdrücklich auf **eigene Gefahr
 * **Funktionalität:** Da die Daten mittels Web-Scraping ausgelesen werden, können Änderungen am ILIAS-System der FH Aachen jederzeit dazu führen, dass die Erweiterung fehlerhaft arbeitet oder den Dienst einstellt.
 
 ### 3. Datenschutz & Sicherheit
-* **Lokale Speicherung:** Alle vom Nutzer eingegebenen Daten (Modulnamen und URLs) werden ausschließlich lokal im Speicher des Browsers (`chrome.storage`) abgelegt. Es findet zu keinem Zeitpunkt eine Übertragung von Daten an externe Server oder Dritte statt.
+* **Lokale Speicherung:** Alle vom Nutzer eingegebenen Daten (Modulnamen und URLs) werden ausschließlich lokal im Speicher des Browsers (`chrome.storage`) abgelegt. Standardmäßig findet keine Übertragung von Daten an externe Server oder Dritte statt. Eine Ausnahme bildet die optionale Discord-Integration: Nur wenn der Nutzer aktiv und freiwillig eine eigene Discord-Webhook-URL in den Einstellungen hinterlegt, werden die ausgelesenen Fristen an diesen spezifischen Discord-Server gesendet. Abgesehen davon bleiben alle Daten zu 100 % lokal.
 * **Kein Zugriff auf Zugangsdaten:** Die Erweiterung fragt niemals Passwörter oder Benutzernamen ab. Sie nutzt lediglich die bereits bestehende, aktive Session des Nutzers im Browser.
 * **Open Source:** Der gesamte Quellcode ist öffentlich einsehbar, um maximale Transparenz und Sicherheit zu gewährleisten.
 
