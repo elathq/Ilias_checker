@@ -2,7 +2,7 @@
 
 > **Inoffizielles Tool von Studenten für Studenten – kein offizielles Angebot der FH Aachen.**
 
-Diese Erweiterung zeigt dir alle anstehenden Praktikums-Fristen der FH Aachen (oder anderen Hochschulen) mit einem Klick.
+Diese Erweiterung zeigt dir alle anstehenden Praktikums-Fristen der FH Aachen mit einem Klick.
 
 ---
 
