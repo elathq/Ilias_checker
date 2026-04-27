@@ -10,7 +10,7 @@ Diese Erweiterung zeigt dir alle anstehenden Praktikums-Fristen der FH Aachen (o
 ### 📥 Download & Installation 
 
 **Am einfachsten:** Füge die Erweiterung direkt über den Web Store zu deinem Browser hinzu:  
-👉 **[[Hier im Chrome Web Store installieren](https://www.google.com/search?q=Platzhalter)]** 
+👉 **[[Hier im Chrome Web Store installieren](https://www.google.com/search?q=Platzhalter)](erst in 1-4 Wochen Verfügbar per Store)** 
 *(Unterstützt Chrome, Edge, Brave und andere Chromium-basierte Browser)*
 🚫 **Firefox:** und **Safari** werden nicht unterstützt.
 
