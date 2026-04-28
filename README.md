@@ -14,7 +14,7 @@ Diese Erweiterung zeigt dir alle anstehenden Praktikums-Fristen der FH Aachen (o
 
 *(Unterstützt Chrome, Edge, Brave und andere Chromium-basierte Browser)*
 
-🚫 **Firefox:** und **Safari** werden nicht unterstützt.
+🚫 **Safari & Firefox werden nicht unterstützt.**
 
 ---
 
