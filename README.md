@@ -22,7 +22,7 @@ Diese Erweiterung zeigt dir alle anstehenden Praktikums-Fristen der FH Aachen (o
 
 1. Klicke auf das Erweiterungs-Icon und öffne die **Einstellungen**.
 2. Gib einen Namen für dein Modul/Fach ein (z. B. *"Programmierung"*).
-3. **WICHTIG:** Gehe in ILIAS auf genau die Unterseite, auf der die restliche Zeit (*"Nächste Abgabefrist:"*) zu sehen ist. Kopiere **diesen** Link und füge ihn ein.
+3. **WICHTIG:** Gehe in ILIAS auf genau die Unterseite, auf der die restliche Zeit (*"Nächste Abgabefrist:"*) zu sehen ist. Kopiere **diesen** Link und füge ihn ein, oder nutze die manuelle Datum/Uhrzeit Funktion.
 4. Klicke auf **Speichern**.
 
 ---
