@@ -1,86 +1,128 @@
-// === js/popup.js ===
-// Hauptsteuerung & Anzeige
+// === popup.js — Hauptsteuerung ===
 
-document.addEventListener('DOMContentLoaded', async function() {
-  // Einstellungen initialisieren
+document.addEventListener('DOMContentLoaded', async function () {
   initSettings();
 
   const listContainer = document.getElementById('deadline-list');
   const sendDiscordBtn = document.getElementById('btn-send-discord');
   const networkNow = await getNetworkTime();
 
-  // Globale Variablen für den manuellen Versand
   let currentReportData = [];
   let currentWebhookUrl = "";
 
-  chrome.storage.local.get(['iliasModules', 'discordWebhook'], async function(data) {
-    const modules = data.iliasModules || [];
+  chrome.storage.local.get(['iliasModules', 'discordWebhook', 'storedDeadlines'], function (data) {
+    const modules = data.iliasModules ? data.iliasModules : [];
     currentWebhookUrl = data.discordWebhook;
+    const storedDeadlines = data.storedDeadlines ? data.storedDeadlines : {};
 
     if (modules.length === 0) {
-      listContainer.innerHTML = "Keine Module konfiguriert.";
+      listContainer.textContent = "Keine Module konfiguriert.";
       return;
     }
 
-    listContainer.innerHTML = "Synchronisiere..."; 
-    let htmlContent = ""; 
+    listContainer.textContent = "Synchronisiere...";
 
-    for (const module of modules) {
-      let targetDate = null; 
+    const results = new Array(modules.length);
+    let completedCount = 0;
 
-      // Datum beschaffen (Manuell oder Scraper)
-      if (module.isManual && module.manualDate) {
-        targetDate = new Date(module.manualDate);
-      } else if (!module.isManual && module.url) {
+    // --- Einzelnes Modul prüfen & laden ---
+
+    async function checkAndScrape(module, index) {
+      const stored = storedDeadlines[module.url];
+      const expired = isDeadlineExpired(stored, networkNow);
+
+      if (!module.isManual && module.url && expired) {
         const result = await scrapeIliasModule(module.url);
-        if (result.error) {
-          htmlContent += `<div class="deadline-item"><div class="course-name">${module.name}</div><div class="date" style="font-size:14px;"><a href="${module.url}" target="_blank" style="color:#d73a49;">LOGIN ERNEUERN</a></div></div>`;
-          continue; 
-        }
-        targetDate = createAbsoluteDate(result.deadline, networkNow);
+        results[index] = result;
+      } else {
+        results[index] = null;
       }
 
-      let dateString = "Keine Frist aktiv";
-      let countdownLabel = "-";
-      let colorClass = "time-green";
+      completedCount = completedCount + 1;
 
-      if (targetDate) {
-        dateString = targetDate.toLocaleString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-        countdownLabel = createCountdownText(targetDate, networkNow);
-        
-        const hoursLeft = (targetDate - networkNow) / 3600000;
-        if (hoursLeft <= 24) {
-          colorClass = "time-red";
-        } else if (hoursLeft <= 72) {
-          colorClass = "time-orange";
-        } else {
-          colorClass = "time-green";
-        }
+      // Sobald alle Module verarbeitet wurden, wird die Liste gezeichnet
+      if (completedCount === modules.length) {
+        renderAll(modules, results, storedDeadlines);
       }
-
-      // Für den manuellen Report speichern
-      currentReportData.push({ name: module.name, deadline: dateString });
-
-      htmlContent += `
-        <div class="deadline-item" style="text-align: center;">
-          <div class="course-name" style="font-style: italic;">${module.name}</div>
-          <div class="date">${dateString}</div>
-          <div class="${colorClass}" style="font-size: 13px; font-weight: bold;">(${countdownLabel})</div>
-        </div>`;
     }
-    
-    listContainer.innerHTML = htmlContent;
 
-    // --- Manueller Discord Versand ---
-    if (currentWebhookUrl && currentWebhookUrl.startsWith('http')) {
-      sendDiscordBtn.onclick = () => {
+    // --- Alle Ladevorgänge gleichzeitig starten ---
+
+    modules.forEach(function (module, index) {
+      checkAndScrape(module, index);
+    });
+
+    // --- DOM aufbauen ---
+
+    function renderAll(modulesList, scrapeResults, savedDeadlines) {
+      const fragment = document.createDocumentFragment();
+      const updatedDeadlines = Object.assign({}, savedDeadlines);
+
+      for (let i = 0; i < modulesList.length; i++) {
+        const module = modulesList[i];
+        let targetDate = null;
+
+        if (module.isManual && module.manualDate) {
+          targetDate = new Date(module.manualDate);
+
+        } else if (!module.isManual && module.url) {
+          const result = scrapeResults[i];
+
+          if (result) {
+            // Modul wurde frisch aus dem Internet geladen
+            if (result.error) {
+              fragment.appendChild(createErrorCard(module.name, module.url));
+              continue;
+            }
+
+            targetDate = createAbsoluteDate(result.deadline, networkNow);
+
+            if (targetDate) {
+              saveDeadline(updatedDeadlines, module.url, module.name, targetDate);
+            }
+          } else {
+            // Modul war noch aktuell und wurde aus dem lokalen Speicher geladen
+            const stored = savedDeadlines[module.url];
+            if (stored && stored.deadline) {
+              targetDate = new Date(stored.deadline);
+            }
+          }
+        }
+
+        let dateString = "Keine Frist aktiv";
+        let countdownLabel = "-";
+        let colorClass = "time-green";
+
+        if (targetDate) {
+          dateString = targetDate.toLocaleString('de-DE', {
+            day: '2-digit', month: '2-digit', year: 'numeric',
+            hour: '2-digit', minute: '2-digit'
+          });
+          countdownLabel = createCountdownText(targetDate, networkNow);
+          colorClass = getColorClass((targetDate - networkNow) / 3600000);
+        }
+
+        currentReportData.push({ name: module.name, deadline: dateString });
+        fragment.appendChild(createDeadlineCard(module.name, dateString, countdownLabel, colorClass));
+      }
+
+      persistDeadlines(updatedDeadlines);
+      listContainer.textContent = '';
+      listContainer.appendChild(fragment);
+    }
+
+    // --- Discord Versand ---
+
+    sendDiscordBtn.onclick = function () {
+      const inputUrl = document.getElementById('discord-webhook').value.trim();
+      const urlToUse = inputUrl ? inputUrl : currentWebhookUrl;
+
+      if (urlToUse && urlToUse.startsWith('https://discord.com/api/webhooks/')) {
         sendDiscordBtn.innerText = "Sende...";
-        sendToDiscord(currentWebhookUrl, currentReportData, sendDiscordBtn);
-      };
-    } else {
-      sendDiscordBtn.disabled = true;
-      sendDiscordBtn.style.opacity = "0.5";
-      sendDiscordBtn.title = "Bitte erst eine Webhook URL eingeben und speichern.";
-    }
+        sendToDiscord(urlToUse, currentReportData, sendDiscordBtn);
+      } else {
+        alert("Bitte gib eine gültige Discord Webhook URL (beginnend mit https://discord.com/api/webhooks/) ein.");
+      }
+    };
   });
 });

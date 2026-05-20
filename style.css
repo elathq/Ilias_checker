@@ -1,161 +1,487 @@
-body { 
-  width: 380px; 
-  font-family: 'Segoe UI', Arial, sans-serif; 
-  padding: 15px; 
-  margin: 0; 
-  color: #333; 
-  background-color: #f9f9f9; 
+/* === Variablen (Themes) === */
+
+:root {
+  /* --- KONTRASTREICHES LIGHT-THEME (Standard bei Installation) --- */
+  --bg-color: #f1f5f9;
+  --bg-gradient: none;
+  --text-main: #0f172a;
+  --text-muted: #334155;
+  --border-color: #cbd5e1;
+  --h3-letter-spacing: 1px;
+  
+  /* Karten */
+  --card-bg: #ffffff;
+  --card-border: #cbd5e1;
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --course-name-color: #0f172a;
+  
+  /* Inputs */
+  --input-bg: #ffffff;
+  --input-border: #94a3b8;
+  --input-focus-bg: #ffffff;
+  --input-focus-border: #00857e;
+  --input-focus-shadow: 0 0 0 3px rgba(0, 133, 126, 0.15);
+  --input-color: #0f172a;
+  --datepicker-scheme: light;
+  
+  /* Buttons (Hauptbutton) */
+  --btn-main-bg: #00857e;
+  --btn-main-hover-bg: #00706a;
+  --btn-main-hover-opacity: 1;
+  --btn-main-hover-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  --btn-main-text: #ffffff;
+  --btn-main-shadow: 0 2px 4px rgba(0, 133, 126, 0.15);
+  --btn-main-weight: 600;
+  
+  /* Buttons (Sekundär) */
+  --btn-secondary-bg: #ffffff;
+  --btn-secondary-border: 1px solid #94a3b8;
+  --btn-secondary-text: #0f172a;
+  --btn-secondary-hover-bg: #ebecee;
+  --btn-secondary-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --btn-secondary-hover-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  
+  /* Buttons (Kleine Icons) */
+  --btn-small-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --btn-toggle-bg: #00857e;
+  --btn-toggle-hover-bg: #00706a;
+  --btn-toggle-text: #ffffff;
+  --btn-toggle-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  
+  --btn-delete-bg: #dc2626;
+  --btn-delete-hover-bg: #b91c1c;
+  --btn-delete-text: #ffffff;
+  --btn-delete-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  
+  /* Countdown / Ampel */
+  --date-color: #dc2626;
+  --date-shadow-glow: none;
+  --color-green: #16a34a;
+  --color-orange: #ea580c;
+  --color-red: #dc2626;
 }
 
-h3 { 
-  margin-top: 0; 
-  color: #333; 
-  border-bottom: 2px solid #00857e; 
+body.dark-mode {
+  /* --- NIGHT-THEME (Glassmorphism & Neon-Teal) --- */
+  --bg-color: #090d16;
+  --bg-gradient: radial-gradient(circle at top, #141b2d 0%, #090d16 100%);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --h3-letter-spacing: 1px;
+  
+  /* Karten */
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  --course-name-color: #e2e8f0;
+  
+  /* Inputs */
+  --input-bg: rgba(255, 255, 255, 0.02);
+  --input-border: rgba(255, 255, 255, 0.1);
+  --input-focus-bg: rgba(255, 255, 255, 0.05);
+  --input-focus-border: #00f0e0;
+  --input-focus-shadow: 0 0 0 3px rgba(0, 240, 224, 0.15);
+  --input-color: #f8fafc;
+  --datepicker-scheme: dark;
+  
+  /* Buttons (Hauptbutton) */
+  --btn-main-bg: #00bdae;
+  --btn-main-hover-bg: #00d2c2;
+  --btn-main-hover-opacity: 1;
+  --btn-main-hover-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  --btn-main-text: #090d16;
+  --btn-main-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --btn-main-weight: 600;
+  
+  /* Buttons (Sekundär) */
+  --btn-secondary-bg: rgba(255, 255, 255, 0.05);
+  --btn-secondary-border: 1px solid rgba(255, 255, 255, 0.08);
+  --btn-secondary-text: #e2e8f0;
+  --btn-secondary-hover-bg: rgba(255, 255, 255, 0.1);
+  --btn-secondary-shadow: none;
+  --btn-secondary-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  
+  /* Buttons (Kleine Icons) */
+  --btn-small-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --btn-toggle-bg: #00bdae;
+  --btn-toggle-hover-bg: #00d2c2;
+  --btn-toggle-text: #090d16;
+  --btn-toggle-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+  
+  --btn-delete-bg: #ff453a;
+  --btn-delete-hover-bg: #ff5b52;
+  --btn-delete-text: #ffffff;
+  --btn-delete-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+  
+  /* Countdown / Ampel */
+  --date-color: #ff453a;
+  --date-shadow-glow: 0 0 10px rgba(255, 69, 58, 0.2);
+  --color-green: #30d158;
+  --color-orange: #ff9f0a;
+  --color-red: #ff453a;
+}
+
+/* === Basis === */
+
+body {
+  width: 380px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  padding: 20px;
+  margin: 0;
+  color: var(--text-main);
+  background-color: var(--bg-color);
+  background: var(--bg-gradient);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--h3-letter-spacing);
+  color: var(--text-muted);
   padding-bottom: 8px;
-  font-size: 18px;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.deadline-item { 
-  background: #fff; 
-  border: 1px solid #d1d9e0; 
-  border-radius: 8px; 
-  padding: 12px; 
-  margin-bottom: 12px; 
-  box-shadow: 0 2px 5px rgba(0,0,0,0.08); 
+/* === Theme Toggle Button === */
+
+.theme-toggle-btn {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.105s ease-out, color 0.105s ease-out;
+  z-index: 10;
+}
+
+/* Standard: Light Mode aktiv -> Mond anzeigen um zu Dark zu wechseln */
+.theme-toggle-btn .sun-icon { display: none; }
+.theme-toggle-btn .moon-icon { display: block; }
+
+/* Dark Mode aktiv -> Sonne anzeigen um zu Light zu wechseln */
+body.dark-mode .theme-toggle-btn .sun-icon { display: block; }
+body.dark-mode .theme-toggle-btn .moon-icon { display: none; }
+
+.theme-toggle-btn:hover {
+  background: transparent;
+  box-shadow: none;
+  transform: scale(1.05);
+  color: var(--text-main);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+/* === Hauptansicht === */
+
+.deadline-item {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
 }
 
-.course-name { color: #2c3e50; font-size: 15px; font-weight: 700; }
-.date { color: #d73a49; font-size: 20px; font-weight: 800; font-family: monospace; }
+.course-name {
+  color: var(--course-name-color);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
 
-#settings-view { display: none; }
+.date {
+  color: var(--date-color);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin: 6px 0;
+  text-shadow: var(--date-shadow-glow);
+}
 
-/* Ersetze deine .input-group und die Felder durch dies hier: */
+/* --- Countdown-Farben --- */
 
-.input-group { 
-  display: flex; 
-  gap: 5px; 
-  margin-bottom: 10px; 
-  align-items: center; 
+.time-green  { color: var(--color-green); }
+.time-orange { color: var(--color-orange); }
+.time-red    { color: var(--color-red); }
+
+.time-green,
+.time-orange,
+.time-red {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+}
+
+/* Weiche Textschatten nur im Dark Mode aktivieren */
+body.dark-mode .time-green  { text-shadow: 0 0 8px rgba(48, 209, 88, 0.25); }
+body.dark-mode .time-orange { text-shadow: 0 0 8px rgba(255, 159, 10, 0.25); }
+body.dark-mode .time-red    { text-shadow: 0 0 8px rgba(255, 69, 58, 0.25); }
+
+/* === Einstellungen === */
+
+#settings-view {
+  display: none;
+}
+
+.input-group {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+  align-items: center;
   width: 100%;
 }
 
-
-/* Die entscheidende Änderung: URL und Date teilen sich exakt denselben Platz */
-.input-url, .input-date, .input-name{ 
-  flex: 1; /* Nimmt den restlichen verfügbaren Platz ein */
-  width: 0; /* Verhindert, dass der Inhalt die Breite "aufdrückt" */
+.input-url,
+.input-date,
+.input-name {
+  flex: 1;
+  width: 0;
   min-width: 0;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box; /* Padding wird in die Breite eingerechnet */
-  height: 35px; /* Einheitliche Höhe für beide */
-}
-.input-name{ 
-  max-width: 32%;
-}
-
-.btn-toggle, .btn-delete {
-  width: 38px;
-  height: 35px;
-  flex-shrink: 0;
-  padding: 0 !important;
-  margin: 0 !important;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #00857e; 
-}
-.btn-delete {
-  background-color: #d73a49
+  padding: 8px 12px;
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  box-sizing: border-box;
+  height: 38px;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--input-color);
+  background-color: var(--input-bg);
+  transition: border-color 0.105s ease-out, box-shadow 0.105s ease-out, background-color 0.105s ease-out;
 }
 
-.discord-settings {
-  margin-top: 15px;
-  padding-top: 10px;
-  border-top: 1px solid #ccc;
-}
-
-.discord-settings label { font-size: 12px; font-weight: bold; display: block; margin-bottom: 5px; }
-.discord-settings input { width: 95%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
-
-button { 
-  cursor: pointer; 
-  margin-top: 10px; 
-  width: 100%; 
-  padding: 12px; 
-  background-color: #00857e; 
-  color: white; 
-  border: none; 
-  border-radius: 6px; 
-  font-weight: bold;
-}
-
-.btn-secondary { background-color: #6e7781; }
-button:hover { opacity: 0.9; transform: translateY(-1px); }
-
-.loader { font-style: italic; color: #666; text-align: center; padding: 20px 0; }
-
-
-/* === Fix für das hüpfende Kalender-Icon === */
-.input-date {
-  cursor: pointer;
-  color-scheme: light;
-  box-sizing: border-box; 
-}
-
-/* Der Picker-Indikator (das Icon) */
-.input-date::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  border-radius: 50%;
-  transition: background-color 0.2s;
-  padding: 3px;
-  margin-right: -3px; 
-  background-color: transparent;
-}
-
-/* Hover-Effekt ohne Layout-Verschiebung */
-.input-date:hover::-webkit-calendar-picker-indicator {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.input-date:focus::-webkit-calendar-picker-indicator {
-  background-color: rgba(0, 133, 126, 0.1);
+.input-url:focus,
+.input-date:focus,
+.input-name:focus {
+  border-color: var(--input-focus-border);
+  box-shadow: var(--input-focus-shadow);
+  background-color: var(--input-focus-bg);
   outline: none;
 }
 
-/* Zentrierung der Ausgabe */
-.deadline-item {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 15px;
-  background: #fff;
+.input-name {
+  max-width: 32%;
+  font-weight: 600;
+}
+
+/* --- Datepicker --- */
+
+.input-date {
+  cursor: pointer;
+  color-scheme: var(--datepicker-scheme);
+}
+
+.input-date::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 4px;
+  margin-right: -2px;
+  background-color: transparent;
+  transition: background-color 0.105s ease-out;
+}
+
+.input-date:hover::-webkit-calendar-picker-indicator {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+body:not(.dark-mode) .input-date:hover::-webkit-calendar-picker-indicator {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.input-date:focus::-webkit-calendar-picker-indicator {
+  background-color: rgba(0, 240, 224, 0.15);
+  outline: none;
+}
+
+body:not(.dark-mode) .input-date:focus::-webkit-calendar-picker-indicator {
+  background-color: rgba(0, 133, 126, 0.1);
+}
+
+/* === Buttons === */
+
+button {
+  cursor: pointer;
+  margin-top: 12px;
+  width: 100%;
+  padding: 11px 16px;
+  background-color: var(--btn-main-bg);
+  color: var(--btn-main-text);
+  border: none;
   border-radius: 8px;
-  margin-bottom: 12px;
-  border: 1px solid #d1d9e0;
+  font-weight: var(--btn-main-weight);
+  font-size: 14px;
+  font-family: inherit;
+  box-shadow: var(--btn-main-shadow);
+  transition: all 0.105s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Der Kursname oben (kursiv, kein Emoji) */
-.course-name {
-  font-style: italic;
-  color: #2c3e50;
-  font-size: 15px;
-  margin-bottom: 5px;
+button:hover {
+  opacity: var(--btn-main-hover-opacity);
+  background-color: var(--btn-main-hover-bg);
+  box-shadow: var(--btn-main-hover-shadow);
 }
 
-/* Die große Datumsanzeige in der Mitte */
-.date {
-  color: #d73a49;
-  font-size: 22px;
-  font-weight: 800;
-  margin: 5px 0;
+button:active {
+  box-shadow: var(--btn-main-shadow);
 }
 
-/* Farben für die Countdown-Zeile */
-.time-green  { color: #27ae60; } /* Grün */
-.time-orange { color: #e67e22; } /* Orange */
-.time-red    { color: #d73a49; } /* Rot */
+/* --- Sekundär-Button --- */
+
+.btn-secondary {
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  border: var(--btn-secondary-border);
+  box-shadow: var(--btn-secondary-shadow);
+}
+
+.btn-secondary:hover {
+  background-color: var(--btn-secondary-hover-bg);
+  box-shadow: var(--btn-secondary-hover-shadow);
+  opacity: 1;
+}
+
+.btn-secondary:active {
+  background-color: var(--btn-secondary-bg);
+  box-shadow: var(--btn-secondary-shadow);
+}
+
+#btn-add {
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+/* --- Toggle & Delete --- */
+
+.btn-toggle,
+.btn-delete {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: none;
+  box-shadow: var(--btn-small-shadow);
+  transition: all 0.105s ease-out;
+}
+
+.btn-toggle {
+  background-color: var(--btn-toggle-bg);
+  color: var(--btn-toggle-text);
+}
+
+.btn-toggle:hover {
+  background-color: var(--btn-toggle-hover-bg);
+  box-shadow: var(--btn-toggle-shadow);
+}
+
+.btn-delete {
+  background-color: var(--btn-delete-bg);
+  color: var(--btn-delete-text);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.btn-delete:hover {
+  background-color: var(--btn-delete-hover-bg);
+  box-shadow: var(--btn-delete-shadow);
+}
+
+/* === Discord === */
+
+.discord-settings {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.discord-settings label {
+  font-size: 11px;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.discord-settings input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 13px;
+  height: 38px;
+  color: var(--input-color);
+  background-color: var(--input-bg);
+  transition: border-color 0.105s ease-out, box-shadow 0.105s ease-out;
+}
+
+.discord-settings input:focus {
+  border-color: #5865F2;
+  box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.25);
+  outline: none;
+}
+
+.btn-discord {
+  background-color: #5865F2;
+  color: #ffffff;
+  margin-top: 10px;
+  box-shadow: none;
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+  transition: all 0.105s ease-out;
+}
+
+.btn-discord.active {
+  opacity: 1;
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 4px 12px rgba(88, 101, 242, 0.25);
+}
+
+.btn-discord.active:hover {
+  background-color: #6773f5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* === Loader === */
+
+.loader {
+  color: var(--text-muted);
+  text-align: center;
+  padding: 30px 0;
+  font-size: 14px;
+  font-weight: 500;
+}

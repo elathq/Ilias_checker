@@ -1,47 +1,50 @@
-// === js/discord.js ===
-// Webhook & Discord Logik
+// === discord.js — Webhook & Discord Logik ===
 
-function sendToDiscord(webhookUrl, allModulesReport, buttonElement) {
+async function sendToDiscord(webhookUrl, allModulesReport, buttonElement) {
+
+  // --- Nachricht aufbauen ---
+
   let listMarkdown = "";
-  
-  allModulesReport.forEach(item => {
-    // \u200B ist ein unsichtbares Zeichen. 
-    // Es zwingt Discord dazu, den doppelten Zeilenumbruch wirklich anzuzeigen
-    listMarkdown += `## ${item.name}\n### ❗ ${item.deadline}\n\n\u200B\n`;
+  allModulesReport.forEach(function (item) {
+    listMarkdown += "### 📘 " + item.name + "\n**Frist:** " + item.deadline + "\n";
   });
 
   const payload = {
     embeds: [{
-      title: "🚀 Ilias-Fristen-Übersicht",
-      description: "Die Fristen deiner Abgaben sind:\n\n" + listMarkdown,
-      color: 5763719,
-      footer: { text: "ILIAS Checker Automatisierung" },
-      timestamp: new Date().toISOString() 
+      title: "🚀 Übersicht der nächsten Abgaben",
+      description: "Hier ist der aktuelle Stand deiner ILIAS-Module:\n\n" + listMarkdown,
+      color: 34174,
+      footer: { text: "ILIAS Deadline Checker" },
+      timestamp: new Date().toISOString()
     }]
   };
 
-  fetch(webhookUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  }).then(response => {
+  // --- Senden ---
+
+  try {
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
     if (response.ok) {
       buttonElement.innerText = "✅ Gesendet!";
-      buttonElement.style.backgroundColor = "#27ae60";
+      buttonElement.style.backgroundColor = "#34c759";
     } else {
-      buttonElement.innerText = "❌ Fehler";
-      buttonElement.style.backgroundColor = "#d73a49";
+      buttonElement.innerText = "❌ Fehler beim Senden";
+      buttonElement.style.backgroundColor = "#ff3b30";
     }
-    setTimeout(() => {
-      buttonElement.innerText = "Übersicht an Discord senden";
-      buttonElement.style.backgroundColor = "#5865F2";
-    }, 3000);
-  }).catch(error => {
+  } catch (error) {
     console.error("Discord Fehler:", error);
-    buttonElement.innerText = "❌ Fehler";
-    setTimeout(() => {
-      buttonElement.innerText = "Übersicht an Discord senden";
-      buttonElement.style.backgroundColor = "#5865F2";
-    }, 3000);
-  });
+    buttonElement.innerText = "❌ Fehler beim Senden";
+    buttonElement.style.backgroundColor = "#ff3b30";
+  }
+
+  // --- Button zurücksetzen ---
+
+  setTimeout(function () {
+    buttonElement.innerText = "Übersicht an Discord senden";
+    buttonElement.style.backgroundColor = "#5865F2";
+  }, 3000);
 }

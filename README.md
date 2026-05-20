@@ -22,9 +22,9 @@ Diese Erweiterung zeigt dir alle anstehenden Praktikums-Fristen der FH Aachen (o
 
 1. Klicke auf das Erweiterungs-Icon und öffne die **Einstellungen**.
 2. Gib einen Namen für dein Modul/Fach ein (z. B. *"Programmierung"*).
-3. **WICHTIG:** Gehe in ILIAS auf genau die Unterseite, auf der die restliche Zeit (*"Nächste Abgabefrist:"*) zu sehen ist. Kopiere **diesen** Link und füge ihn ein, oder nutze die manuelle Datum/Uhrzeit Funktion.
-4. Klicke auf **Speichern**.
-
+3. **WICHTIG:** Gehe in ILIAS auf genau die Unterseite, auf der die restliche Zeit (*"Nächste Abgabefrist:"*) oder (*"Abgabefrist:"*)zu sehen ist. Kopiere **diesen** Link und füge ihn ein, oder nutze die manuelle Datum/Uhrzeit Funktion.
+4. Klicke auf **Speichern & Aktualisieren**.
+5. Fertig 
 ---
 
 **🛠️Manuelle Installation (für Entwickler):**
@@ -48,7 +48,7 @@ Diese Erweiterung zeigt dir alle anstehenden Praktikums-Fristen der FH Aachen (o
 
 *  **Passwort-Sicher:** Das Tool speichert **keine Passwörter**, sondern nutzt einfach deinen aktuellen, aktiven ILIAS-Login-Cookie im Browser.
 *  **100% Lokal:** Deine Links bleiben nur auf deinem PC. Kein Tracking, keine Cloud.
-*  **Tipp:** Wenn du bei ILIAS ausgeloggt bist bzw. der Login-Cookie abgelaufen ist, zeigt das Tool einen Fehler an. Einfach kurz bei ILIAS anmelden, dann funktioniert wieder alles!
+*  **Tipp:** Wenn du bei ILIAS ausgeloggt bist bzw. der Login-Cookie abgelaufen ist, zeigt das Tool einen Fehler an. Einfach kurz bei ILIAS anmelden, dann funktioniert wieder alles.
 * **Open-Source-Projekt:** Dies ist ein rein privates Projekt – kein offizielles Tool der FH Aachen. Nutzung auf eigene Gefahr.
 ---
 
