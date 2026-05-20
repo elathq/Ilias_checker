@@ -35,7 +35,7 @@ Diese Erweiterung zeigt dir alle anstehenden Praktikums-Fristen der FH Aachen (o
 **Für Chrome / Edge / Opera / Vivaldi / Brave:**
 1. Öffne im Browser `chrome://extensions/` (oder `edge://extensions/`).
 2. Aktiviere oben rechts den **Entwicklermodus**.
-3. Klicke auf **Entpackte Erweiterung laden** und wähle den Ordner **`ilias_checker`** aus.
+3. Klicke auf **Entpackte Erweiterung laden** und wähle den Ordner **`ILIAS_Checker_v.X.X.zip`** aus.
 4. Pinne das Icon neben deine Adressleiste.
 
 **Für Firefox (Eingeschränkt / nicht empfohlen):**
