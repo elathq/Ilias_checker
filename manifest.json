@@ -3,7 +3,7 @@
   "name": "ILIAS Deadline Checker",
   "version": "1.4.0",
   "author": "elathq | Younes",
-  "description": "Zeigt live die nächsten Abgabefristen für FH Aachen ILIAS Module an.",
+  "description": "Diese Erweiterung zeigt dir alle anstehenden Praktikums-Fristen und Abgaben mit nur einem Klick direkt in deinem Browser.",
   "permissions": ["storage"],
   "host_permissions": [
     "*://*.ili.fh-aachen.de/*",
