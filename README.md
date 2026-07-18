@@ -18,7 +18,7 @@ Diese Erweiterung zeigt dir alle anstehenden Praktikums-Fristen der FH Aachen (o
 
 ---
 
-## 2. ⚙️ Einrichtung
+## 2. Einrichtung
 
 1. Klicke auf das Erweiterungs-Icon und öffne die **Einstellungen**.
 2. Gib einen Namen für dein Modul/Fach ein (z. B. *"Programmierung"*).
@@ -44,7 +44,7 @@ Diese Erweiterung zeigt dir alle anstehenden Praktikums-Fristen der FH Aachen (o
 
 ---
 
-## 3. 🔒 Info, Datenschutz & Rechtliches
+## 3. Info, Datenschutz & Rechtliches
 
 *  **Passwort-Sicher:** Das Tool speichert **keine Passwörter**, sondern nutzt einfach deinen aktuellen, aktiven ILIAS-Login-Cookie im Browser.
 *  **100% Lokal:** Deine Links bleiben nur auf deinem PC. Kein Tracking, keine Cloud.
